@@ -9,6 +9,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.a9be.annuar.mylibrary.ItemAdapter;
+import com.a9be.annuar.mylibrary.Rows;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("tagLog", "width = " + String.valueOf(dpWidth));
 
-        List<String> row = new ArrayList<>();
-        row.add("1");
-        row.add("1");
-        row.add("200");
-        row.add("0");
-        row.add("Ni Label");
-        row.add("1");
-        row.add("Ni Value");
+//        List<String> row = new ArrayList<>();
+//        row.add("1");
+//        row.add("1");
+//        row.add("200");
+//        row.add("0");
+//        row.add("Ni Label");
+//        row.add("1");
+//        row.add("Ni Value");
 
+        String json = "{\"rows\":[{\"row\":[\"0\",\"0\",\"0\",\"1\",\"Ni Header\"]}]}";
+        Rows rows = new Gson().fromJson(json, Rows.class);
 
-        itemAdapter = new ItemAdapter(this, row, convertDpToPixel(dpWidth-10));
+        itemAdapter = new ItemAdapter(this, rows.getRows(), convertDpToPixel(dpWidth-10));
         recycle.setHasFixedSize(true);
         recycle.setLayoutManager(new LinearLayoutManager(this));
         recycle.setAdapter(itemAdapter);
